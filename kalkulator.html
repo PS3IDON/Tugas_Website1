@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphism Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="display">
+            <input id="screen" type="text" value="0">
+        </div>
+
+        <div class="btns">
+            <div class="row">
+                <button id="ce" onclick="clearEntry()">CE</button>
+                <button class="btn">(</button>
+                <button class="btn">)</button>
+                <button class="btn" onclick="append('%')">%</button>
+                <button id="ac" onclick="clearScreen()">AC</button>
+            </div>
+
+            <div class="row">
+                <button onclick="trigFunction('sin')">sin</button>
+                <button class="btn" onclick="append(7)">7</button>
+                <button class="btn" onclick="append(8)">8</button>
+                <button class="btn" onclick="append(9)">9</button>
+                <button class="btn" onclick="append('/')">/</button>
+            </div>
+
+            <div class="row">
+                <button onclick="trigFunction('cos')">cos</button>
+                <button class="btn" onclick="append(4)">4</button>
+                <button class="btn" onclick="append(5)">5</button>
+                <button class="btn" onclick="append(6)">6</button>
+                <button class="btn" onclick="append('*')">*</button>
+            </div>
+
+            <div class="row">
+                <button onclick="trigFunction('tan')">tan</button>
+                <button class="btn" onclick="append(1)">1</button>
+                <button class="btn" onclick="append(2)">2</button>
+                <button class="btn" onclick="append(3)">3</button>
+                <button class="btn" onclick="append('-')">-</button>
+            </div>
+
+            <div class="row">
+                <button class="btn" onclick="append(0)">0</button>
+                <button class="btn" onclick="append('.')">.</button>
+                <button id="eval" onclick="calculate()">=</button>
+                <button class="btn" onclick="append('+')">+</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var screen = document.querySelector('#screen');
+
+        function append(value) {
+            if (screen.value === '0') {
+                screen.value = value;
+            } else {
+                screen.value += value;
+            }
+        }
+
+        function clearEntry() {
+            screen.value = screen.value.slice(0, -1);
+            if (screen.value === '') {
+                screen.value = '0';
+            }
+        }
+
+        function clearScreen() {
+            screen.value = '0';
+        }
+
+        function trigFunction(func) {
+  var degree = eval(screen.value); // Ambil nilai derajat dari input
+  var radian = degree * (Math.PI / 180); // Konversi derajat ke radian
+  var result = Math[func](radian); // Hitung fungsi trigonometri dengan radian
+  alert(func + '(' + degree + ' derajat) = ' + result);
+  screen.value = result;
+}
+
+
+        function calculate() {
+            try {
+                var result = eval(screen.value);
+                alert('Hasil: ' + result);
+                screen.value = result;
+            } catch (error) {
+                alert('Error: ' + error);
+                screen.value = '0';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
